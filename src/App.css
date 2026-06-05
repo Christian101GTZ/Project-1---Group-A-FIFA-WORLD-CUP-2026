@@ -1,0 +1,141 @@
+/* ============================================================
+   GROUP A — FIFA WORLD CUP 2026  ·  stylesheet
+   px = pixels · rem ≈ 16px · margin = space outside ·
+   padding = space inside · border-radius = corner roundness
+   ============================================================ */
+
+/* ---------- PAGE BASE ---------- */
+html {
+  min-height: 100%;
+  background: linear-gradient(135deg, #006847, #0a1f44) fixed; /* page background — change the 2 colors */
+  background-color: #0a1f44;        /* color shown when you scroll past the edge */
+}
+body {
+  min-height: 100vh;
+  color: #f5f7fa;                   /* default text color — change for lighter/darker text */
+}
+.App {
+  max-width: 1200px;                /* page width — lower = narrower */
+  margin: 0 auto;                   /* centers the page */
+  padding: 2rem 1.25rem 4rem;       /* space inside: top | sides | bottom */
+}
+
+/* ---------- HEADER ---------- */
+.hero { text-align: center; margin-bottom: 2.5rem; }   /* centers the title block */
+.hero h1 { font-size: 2.4rem; margin: 0 0 .4rem; letter-spacing: -0.5px; } /* title size — bigger number = bigger */
+.hero p  { color: #cdd9ec; margin: 0; }                /* subtitle color */
+
+.tricolor {                         /* the colored bar under the title */
+  height: 5px; width: 220px;        /* bar thickness | length */
+  margin: 1rem auto 0; border-radius: 4px;
+  background: linear-gradient(90deg, #006847 0 33%, #fff 33% 66%, #ff0202 66% 100%); /* its 3 colors — change any */
+}
+
+h2 {                                /* section headings */
+  font-size: 1.3rem; margin: 2.5rem 0 1rem;
+  border-left: 4px solid #006847;   /* the stripe — change color/thickness */
+  padding-left: .6rem; text-align: left;
+}
+
+/* ---------- SIMULATOR ZONE (table | matches) ---------- */
+.sim {
+  display: grid;
+  grid-template-columns: 1fr 1fr;   /* 2 columns side-by-side; use "1fr" to stack them */
+  gap: 1.5rem; align-items: start;  /* gap = space between the two */
+}
+.standings-col h2, .matches-col h2 { margin-top: 0; }
+.standings-col { position: sticky; top: 1rem; }   /* keeps the table on screen; top = how far down it sticks */
+.sim-hint { font-size: .78rem; color: #cdd9ec; margin-top: .6rem; text-align: left; }
+
+/* ---------- STANDINGS TABLE ---------- */
+.standings {
+  width: 100%; border-collapse: collapse;
+  background: #11294f;              /* table color */
+  border-radius: 12px; overflow: hidden; font-size: .92rem;
+}
+.standings th, .standings td { padding: .55rem .4rem; text-align: center; } /* cell spacing */
+.standings th { background: rgba(0,0,0,0.25); color: #9fb3d1; font-weight: 600; } /* header row */
+.standings tbody tr { border-top: 1px solid rgba(255,255,255,0.1); }   /* line between rows */
+.standings tbody tr:nth-child(-n+2) { background: rgba(0,104,71,0.28); } /* highlights top 2 — change 2 for more */
+.standings .team-cell { text-align: left; white-space: nowrap; display: flex; align-items: center; gap: .4rem; }
+.standings .team-cell img { border-radius: 2px; }
+.standings .pts { font-weight: 700; }   /* makes Points bold */
+
+/* ---------- MATCHES (scrolling column) ---------- */
+.matches-grid {
+  display: flex; flex-direction: column; gap: .8rem;   /* stacks match cards */
+  max-height: 470px;                /* height before it scrolls — change to taller/shorter */
+  overflow-y: auto; padding-right: .5rem;
+}
+.matches-grid::-webkit-scrollbar { width: 8px; }        /* scrollbar width */
+.matches-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.18); border-radius: 8px; }
+
+.match-card {
+  background: #11294f;              /* card color */
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px; padding: .9rem 1rem;
+}
+.match-meta {                       /* small "Matchday 1 · …" label */
+  color: #9fb3d1; font-size: .72rem;
+  text-transform: uppercase; letter-spacing: .5px; margin-bottom: .55rem;
+}
+.scoreline { display: flex; align-items: center; justify-content: center; gap: .5rem; font-weight: 600; }
+.team-side { flex: 1; display: flex; align-items: center; gap: .4rem; }
+.team-side.home { justify-content: flex-end; }    /* home team sits right, next to score */
+.team-side.away { justify-content: flex-start; }  /* away team sits left, next to score */
+.flag-sm { border-radius: 3px; }
+.score { display: flex; align-items: center; gap: .35rem; }
+.score-input {
+  width: 42px; height: 36px;        /* score box size */
+  text-align: center; font-size: 1.05rem; font-weight: 700;
+  border: 1px solid rgba(255,255,255,0.2); border-radius: 8px;
+  background: #0c2347; color: #fff; /* box color | number color */
+  -moz-appearance: textfield; appearance: textfield;   /* hides the up/down arrows */
+}
+.score-input::-webkit-outer-spin-button,
+.score-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; } /* hides arrows (Chrome/Edge) */
+.match-venue { color: #9fb3d1; font-size: .78rem; text-align: center; margin-top: .55rem; }
+
+/* ---------- CARD GRIDS (teams + stadiums) ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);   /* cards per row — change the 4 */
+  gap: 1rem;                               /* space between cards */
+}
+.team-card, .stadium-card {         /* look shared by both card types */
+  background: #11294f;              /* card color */
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;              /* corner roundness */
+}
+
+/* ---------- TEAM CARDS ---------- */
+.team-card { padding: 1.2rem .8rem; text-align: center; }
+.flag-img { width: 80px; height: auto; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.35); } /* flag size = width */
+.team-card .name { font-weight: 700; margin: .5rem 0 .15rem; }   /* country name */
+.team-card .rank { color: #9fb3d1; font-size: .82rem; }          /* FIFA rank line */
+
+/* ---------- STADIUM CARDS ---------- */
+.stadium-card { overflow: hidden; display: flex; flex-direction: column; text-align: left; }
+.stadium-img { width: 100%; height: 150px; object-fit: cover; display: block; } /* photo height — change 150px */
+.stadium-name { margin: .8rem 1rem .2rem; font-size: 1.02rem; }  /* stadium title */
+.stadium-loc  { color: #9fb3d1; font-size: .82rem; margin: 0 1rem .6rem; }   /* city line */
+.stadium-fact { font-style: italic; color: #cdd9ec; font-size: .85rem; margin: 0 1rem .7rem; } /* description */
+.stadium-stats { margin: 0 1rem .9rem; padding-left: 1.1rem; font-size: .82rem; color: #dbe6f5; } /* capacity/opened list */
+.stadium-stats li { margin-bottom: .2rem; }
+.stadium-link {
+  margin: auto 1rem 1rem;           /* "auto" top = sticks button to card bottom */
+  text-align: center; background: #006847; color: #fff; text-decoration: none; /* button color | text color */
+  padding: .55rem; border-radius: 8px; font-size: .85rem; font-weight: 600;
+}
+.stadium-link:hover { background: #00543a; }   /* button color on hover */
+
+/* ---------- RESPONSIVE (small screens) ---------- */
+@media (max-width: 800px) {         /* tablet */
+  .sim { grid-template-columns: 1fr; }        /* stack table above matches */
+  .standings-col { position: static; }        /* stop the table sticking */
+  .grid { grid-template-columns: repeat(2, 1fr); }  /* 2 cards per row */
+}
+@media (max-width: 460px) {         /* phone */
+  .grid { grid-template-columns: 1fr; }       /* 1 card per row */
+  .hero h1 { font-size: 1.8rem; }             /* smaller title */
+}
