@@ -1,4 +1,4 @@
-# Web Development Project 1 - Group A: FIFA WORLD CUP 2026
+# Project 1 - Group A: FIFA WORLD CUP 2026
 
 Submitted by: **Christian Gomez**
 
